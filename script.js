@@ -1,50 +1,50 @@
-// document.addEventListener('DOMContentLoaded', () => {
-//     const addBtn = document.getElementById('addBtn');
-//     const addBox = document.getElementById('addBox');
-//     const todoList = document.getElementById('todoList');
+document.addEventListener('DOMContentLoaded', () => {
+    const addBox = document.getElementById('addBox');
+    const todoList = document.querySelector('.lower');
   
-//     // Add a new todo item
-//     addBox.addEventListener('keypress', function (e) {
-//       if (e.key === 'Enter' && addBox.value.trim() !== '') {
-//         const todoText = addBox.value.trim();
-//         addTodoItem(todoText);
-//         addBox.value = '';
-//       }
-//     });
+    // Function to add a new todo item
+    addBox.addEventListener('keypress', function (e) {
+      if (e.key === 'Enter' && addBox.value.trim() !== '') {
+        const todoText = addBox.value.trim();
+        addTodoItem(todoText);
+        addBox.value = '';
+      }
+    });
   
-//     function addTodoItem(text) {
-//       const itemSpan = document.createElement('span');
-//       itemSpan.className = 'item';
+    function addTodoItem(text) {
+      const itemSpan = document.createElement('span');
+      itemSpan.className = 'item';
   
-//       const deleteBtn = document.createElement('input');
-//       deleteBtn.type = 'radio';
-//       deleteBtn.className = 'deleteBtn';
-//       deleteBtn.addEventListener('click', () => {
-//         todoList.removeChild(itemSpan, hr);
-//       });
+      const todoText = document.createElement('p');
+      todoText.textContent = text;
   
-//       const todoText = document.createElement('p');
-//       todoText.textContent = text;
+      const deleteBtn = document.createElement('p');
+      deleteBtn.id = 'deleteBtn';
+      deleteBtn.textContent = 'delete';
+      deleteBtn.style.cursor = 'pointer';
+      deleteBtn.addEventListener('click', () => {
+        todoList.removeChild(itemSpan);
+      });
   
-//       itemSpan.appendChild(deleteBtn);
-//       itemSpan.appendChild(todoText);
+      const editBtn = document.createElement('p');
+      editBtn.id = 'editBtn';
+      editBtn.textContent = 'edit';
+      editBtn.style.cursor = 'pointer';
+      // You can add edit functionality later if needed.
   
-//       todoList.appendChild(itemSpan);
+      itemSpan.appendChild(todoText);
+      itemSpan.appendChild(deleteBtn);
+      itemSpan.appendChild(editBtn);
   
-//       const hr = document.createElement('hr');
-//       todoList.appendChild(hr);
-//     }
-    
+      todoList.appendChild(itemSpan);
+    }
   
-//     // Adding some initial todos
-//     const initialTodos = [
-//       "Jog around the park 3x",
-//       "10 minutes meditation",
-//       "Read for 1 hour",
-//       "Pick up groceries",
-//       "Complete Todo App on Frontend Mentor"
-//     ];
-  
-//     initialTodos.forEach(todo => addTodoItem(todo));
-//   });
+    // Adding event listeners to initial delete buttons
+    document.querySelectorAll('#deleteBtn').forEach(button => {
+      button.addEventListener('click', function() {
+        const item = this.parentElement;
+        todoList.removeChild(item);
+      });
+    });
+  });
   
